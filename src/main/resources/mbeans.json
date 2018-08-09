@@ -1,0 +1,10 @@
+{
+  "java.lang:type=OperatingSystem": [
+    "Name",
+    "Arch",
+    "Version"
+  ],
+  "java.lang:type=Threading": [
+    "ThreadCount"
+  ]
+}

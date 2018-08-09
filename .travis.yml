@@ -1,0 +1,13 @@
+language: java
+install: true
+
+#addons:
+#  apt:
+#    packages:
+#      - openjdk-6-jdk
+
+jdk:
+  - openjdk8
+
+script:
+  - ./gradlew build jar --scan -s

@@ -1,0 +1,1 @@
+-javaagent:path\to\java-jmx-mbean-dump-1.0-SNAPSHOT-complete.jar

@@ -1,0 +1,41 @@
+group 'com.stephenfairchild'
+version '1.0.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.6'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+jar {
+    archiveName = "${rootProject.name}-${rootProject.version}-agent.jar"
+    manifest {
+        attributes(
+                'Main-Class': 'com.stephenfairchild.jmx.mbean.dump.Main',
+                'Premain-Class': 'com.stephenfairchild.jmx.mbean.dump.Main',
+                'Implementation-Title': rootProject.name,
+                'Implementation-Version': rootProject.version
+        )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    } {
+        exclude "META-INF/*.SF"
+        exclude "META-INF/*.DSA"
+        exclude "META-INF/*.RSA"
+    }
+}
+
+task runJar(type: JavaExec) {
+    dependsOn jar
+    main = "-jar"
+    args = [jar.archivePath]
+}
